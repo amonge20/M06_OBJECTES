@@ -14,6 +14,9 @@ function afegirCicle(){
         llistatCicles.push(cicle);
     }else{
         //Editar cicle
+        let index = document.getElementById("editCicle").value;
+        llistatCicles[index] = cicle;
+        actualizarCicle(index);
 
     }
     
@@ -65,6 +68,9 @@ function printLlistat (llistat){
     document.getElementById("llistat").innerHTML=str;
 }
 
+function actualizarCicle(index) {
+    printLlistat(llistatCicles, index);
+}
 //Funció per actualitzar el selector de cicles cada vegada que afegim un cicle
 function actualitzarSelector(){
     let select = document.getElementById('modul_cicle');
@@ -79,7 +85,9 @@ function actualitzarSelector(){
 
 //Funció per eliminar un cicle
 function removeCicle(i){
-
+    llistatCicles.splice(i,1);
+    actualitzarSelector();
+    printLlistat(llistatCicles);
 }
 
 //Funció per editar un cicle
@@ -90,6 +98,10 @@ function editCicle(i){
     document.getElementById("cicle_abr").value = llistatCicles[i].abreviatura;
 
     document.getElementById("editCicle").value=i;
+}
+
+function calculHores(i){
+    alert("calcul en hores: " + llistatCicles[i].nom);
 }
 
 //Funció per netejar els formularis
