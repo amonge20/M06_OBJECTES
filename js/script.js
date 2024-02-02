@@ -6,7 +6,7 @@ let llistatCicles = [];
 document.getElementById("btnAfegirCicle").addEventListener("click", afegirCicle);
 document.getElementById("btnAfegirModul").addEventListener("click", afegirModul);
 
-function afegirCicle(){
+function afegirCicle() {
     let nom = document.getElementById("cicle_nom").value;
     let categoria = document.getElementById("cicle_categoria").value;
     let numAlumnes = document.getElementById("cicle_alumnes").value;
@@ -14,28 +14,28 @@ function afegirCicle(){
     let index = document.getElementById("editCicle").value;
 
     let cicle = new Cicle(nom, categoria, numAlumnes, abreviatura);
-    cicle.toString();
 
-    if(index === "-1"){
-        //Afegim el cicle al llistat
+    if (index === "-1") {
+        // Afegim el cicle al llistat
         llistatCicles.push(cicle);
-    }else{
+    } else if (index >= 0 && index < llistatCicles.length) {
         llistatCicles[index].nom = nom;
         llistatCicles[index].categoria = categoria;
         llistatCicles[index].numAlumnes = numAlumnes;
         llistatCicles[index].abreviatura = abreviatura;
+        document.getElementById("editCicle").value = -1;
+    } else {
+        console.error("CICLE NO CREAT:", index);
     }
-    
-    //Actualitzem el selector
+
+    // Actualitzem el selector
     actualitzarSelector();
 
-    //Printem la llista
+    // Printem la llista
     printLlistat(llistatCicles);
 
-    //Netegem els formularis
+    // Netegem els formularis
     netejarFormularis();
-
-    document.getElementById("editCicle").value = -1;
 }
 
 function afegirModul(){
@@ -46,11 +46,11 @@ function afegirModul(){
     let modul_hores = document.getElementById("modul_hores").value;
 
     let modul = new Modul(cicle, modul_nom, modul_num, modul_hores);
-    modul.toString();
     cicle.addModul(modul);
 
     //Printem la llista
     printLlistat(llistatCicles);
+
 
     //Netegem els formularis
     netejarFormularis();
@@ -68,13 +68,25 @@ function printLlistat(llistat) {
                     <p class="font-normal text-gray-700">Última edició: ${element.ultimaEdicio}</p>
                     <p class="font-normal text-gray-700">Hores: ${element.horesTotals}</p>
 
-                    <button type="button" onClick="removeCicle(${index})" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Eliminar</button>
-                    <button type="button" onClick="editCicle(${index})" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Editar</button>
-                    <button type="button" onClick="calculHores(${index})" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Càlcul hores</button>
+                    <button type="button" id="btnRemove-${index}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Eliminar</button>
+                    <button type="button" id="btnEditar-${index}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Editar</button>
+                    <button type="button" id="btnCalcularHoras-${index}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Càlcul hores</button>
                 </div>`;
     });
 
     document.getElementById("llistat").innerHTML = str;
+    llistat.forEach(function (_,index){
+
+        document.getElementById(`btnRemove-${index}`).addEventListener("click", function () {
+            removeCicle(index);
+        });
+        document.getElementById(`btnEditar-${index}`).addEventListener("click", function(){
+            editCicle(index);
+        });
+        document.getElementById(`btnCalcularHoras-${index}`).addEventListener("click", function(){
+            calculHores(index);
+        });
+    });
 }
 
 //Funció per actualitzar el selector de cicles cada vegada que afegim un cicle
@@ -103,7 +115,8 @@ function editCicle(i){
     document.getElementById("cicle_alumnes").value = llistatCicles[i].numAlumnes;
     document.getElementById("cicle_abr").value = llistatCicles[i].abreviatura;
 
-    document.getElementById("editCicle").value=i;
+    document.getElementById("editCicle").value = i;
+    document.getElementById("editCicle").value = -1;
 }
 
 function calculHores(i){

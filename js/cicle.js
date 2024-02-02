@@ -1,3 +1,4 @@
+//Exportem la classe Cicle
 export class Cicle {
     constructor(nom, categoria, numAlumnes, abreviatura) {
         this.nom = nom;
@@ -7,10 +8,10 @@ export class Cicle {
         this.numEdicions = 0;
         this.moduls = [];
     }
-
+    //Resultat final
     toString() {
-        let modulStrings = this.moduls.map(modul => modul.toString()).join(", ");
-        console.log(`Cicle: ${this.nom} [${this.abreviatura}], de la categoria ${this.categoria} amb ${this.numAlumnes} alumnes. Els seus mòduls són: ${modulStrings}`);
+        // let modulStrings = this.moduls.map(modul => modul.toString()).join(", ");
+        console.log(`Cicle: ${this.nom}, ${this.categoria}, ${this.numAlumnes}, ${this.abreviatura}`);
     }
 
     setNumEdicions() {
