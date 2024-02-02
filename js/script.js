@@ -66,7 +66,7 @@ function printLlistat(llistat) {
                     <p class="font-normal text-gray-700">Num d'alumnes: ${element.numAlumnes}</p>
                     <p class="font-normal text-gray-700">Num d'edicions: ${element.numEdicions}</p>
                     <p class="font-normal text-gray-700">Última edició: ${element.ultimaEdicio}</p>
-                    <p class="font-normal text-gray-700">Hores: ${element.calcularHores()}</p>
+                    <p class="font-normal text-gray-700">Hores: ${element.horesTotals}</p>
 
                     <button type="button" onClick="removeCicle(${index})" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Eliminar</button>
                     <button type="button" onClick="editCicle(${index})" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Editar</button>
