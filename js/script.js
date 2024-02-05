@@ -18,14 +18,11 @@ function afegirCicle() {
     if (index === "-1") {
         // Afegim el cicle al llistat
         llistatCicles.push(cicle);
-    } else if (index >= 0 && index < llistatCicles.length) {
+    } else {
         llistatCicles[index].nom = nom;
         llistatCicles[index].categoria = categoria;
         llistatCicles[index].numAlumnes = numAlumnes;
         llistatCicles[index].abreviatura = abreviatura;
-        document.getElementById("editCicle").value = -1;
-    } else {
-        console.error("CICLE NO CREAT:", index);
     }
 
     // Actualitzem el selector
@@ -36,6 +33,8 @@ function afegirCicle() {
 
     // Netegem els formularis
     netejarFormularis();
+
+    document.getElementById("editCicle").value = -1;
 }
 
 function afegirModul(){
@@ -116,12 +115,10 @@ function editCicle(i){
     document.getElementById("cicle_abr").value = llistatCicles[i].abreviatura;
 
     document.getElementById("editCicle").value = i;
-    // document.getElementById("editCicle").value = -1;
 }
 
 function calculHores(i){
-    let hores = llistatCicles[i].calcularHores();
-    alert(`calcul en hores: ${hores}`);
+    llistatCicles[i].calculHores();
 }
 
 //Funció per netejar els formularis

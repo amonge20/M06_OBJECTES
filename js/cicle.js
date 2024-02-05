@@ -31,7 +31,7 @@ export class Cicle {
         console.log(`Hores totals: ${horesTotals}`);
         console.log(`Nombre de mòduls: ${count}`);
         let mitjana = horesTotals / count;
-        console.log(`Mitjana d'hores: ${mitjana}`);
-        alert(mitjana);
+        console.log(`Calcul en hores: ${mitjana}`);
+        alert("Calcul en hores: " + mitjana);
     }
 }
