@@ -116,7 +116,7 @@ function editCicle(i){
     document.getElementById("cicle_abr").value = llistatCicles[i].abreviatura;
 
     document.getElementById("editCicle").value = i;
-    document.getElementById("editCicle").value = -1;
+    // document.getElementById("editCicle").value = -1;
 }
 
 function calculHores(i){
